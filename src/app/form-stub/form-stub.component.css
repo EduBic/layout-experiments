@@ -1,0 +1,18 @@
+
+.input {
+  padding: 4%;
+}
+
+.vertical-in {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizontal-in {
+  display: flex;
+  flex-direction: row;
+}
+
+mat-form-field {
+  width: 100%;
+}
