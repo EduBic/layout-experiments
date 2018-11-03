@@ -1,21 +1,6 @@
 
-#main-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-
-.panel {
+a {
   border: 1px solid black;
-}
-
-.section {
-  border: 1px dashed blue;
-}
-
-#input-panel {
-  /* background-color: thistle; */
-}
-
-#output-panel {
-  /* background-color: lightgreen; */
+  padding-left: 1%;
+  padding-right: 1%;
 }
