@@ -9,11 +9,13 @@ import { TextStubComponent } from './text-stub/text-stub.component';
 import { FormStubComponent } from './form-stub/form-stub.component';
 import { LayoutContainerComponent } from './layout-container/layout-container.component';
 import { GuiContainerComponent } from './gui-container/gui-container.component';
+import { BabylonContainerComponent } from './babylon-container/babylon-container.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/layout-test', pathMatch: 'full' },
   { path: 'layout-test', component: LayoutContainerComponent },
   { path: 'threejs-test', component: GuiContainerComponent },
+  { path: 'babylonjs-test', component: BabylonContainerComponent },
   { path: '**', component:  LayoutContainerComponent },
 ];
 
@@ -24,6 +26,7 @@ const appRoutes: Routes = [
     FormStubComponent,
     LayoutContainerComponent,
     GuiContainerComponent,
+    BabylonContainerComponent,
   ],
   imports: [
     BrowserModule,
