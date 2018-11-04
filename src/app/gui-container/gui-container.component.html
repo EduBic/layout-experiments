@@ -1,3 +1,15 @@
 <div #wrapper>
 
+  <!-- (keydown.ArrowLeft)="goLeft($event)" (keydown.ArrowRight)="goRight($event)" -->
+  <!-- (keydown.ArrowUp)="goUp($event)" (keydown.ArrowDown)="goDown($event)" -->
+
+</div>
+
+<diV>
+  <button mat-button (click)="setNormalView()">Normal View</button>
+  <button mat-button>Up View</button>
+  <button mat-button (click)="setAngleView()">Angle View</button>
+</diV>
+<div>
+  <p> Director Rotation X axe: {{ directorCameraRotateX }}</p>
 </div>
