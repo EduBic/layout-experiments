@@ -29,7 +29,8 @@ export class GuiContainerComponent implements AfterViewInit {
   camera;
   cameraHelper;
 
-  directorCamera;
+  upCamera;
+  angleCamera;
   activeCamera;
 
   cameraRig;
@@ -61,17 +62,30 @@ export class GuiContainerComponent implements AfterViewInit {
     // this.scene.add(this.cameraHelper);
 
 
-    this.directorCamera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 4);
-    this.directorCamera.position.y += 4;
-    this.directorCamera.rotation.x = 270 * Math.PI / 180;
+    this.upCamera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 4);
+    this.upCamera.position.y += 4;
+    this.upCamera.rotation.x = 270 * Math.PI / 180;
+
+    this.angleCamera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
+    this.angleCamera.position.y = 10;
+    this.angleCamera.position.x = 10;
+    this.angleCamera.position.z = 10;
+    this.angleCamera.lookAt(new THREE.Vector3(0, 0, 0));
+    // this.angleCamera.rotation.x = 315 * Math.PI / 180;
+    // this.angleCamera.rotation.y = 45 * Math.PI / 180;
+    // this.angleCamera.rotation.z = 45 * Math.PI / 180;
+
+    const angleCameraHelper = new THREE.CameraHelper(this.angleCamera);
+    this.scene.add(angleCameraHelper);
 
 
-    const dirCameraHelper = new THREE.CameraHelper(this.directorCamera);
-    this.scene.add(dirCameraHelper);
+    const upCameraHelper = new THREE.CameraHelper(this.upCamera);
+    this.scene.add(upCameraHelper);
 
     this.cameraRig = new THREE.Group();
     this.cameraRig.add(this.camera);
-    this.cameraRig.add(this.directorCamera);
+    this.cameraRig.add(this.upCamera);
+    this.cameraRig.add(this.angleCamera);
     this.scene.add(this.cameraRig);
 
     // const directorCameraHelper = new THREE.CameraHelper( this.directorCamera );
@@ -111,13 +125,6 @@ export class GuiContainerComponent implements AfterViewInit {
     const axesHelper = new THREE.AxesHelper(5);
     this.scene.add(axesHelper);
 
-    const linePerspGeo = new THREE.Geometry();
-    linePerspGeo.vertices.push(new THREE.Vector3(0, 4, 0));
-    linePerspGeo.vertices.push(new THREE.Vector3(0, 4, -5));
-
-    const linePersp = new THREE.Line(linePerspGeo, lineMaterial);
-    this.scene.add(linePersp);
-
     // Add a point
     // const dotGeometry = new THREE.Geometry();
     // dotGeometry.vertices.push(new THREE.Vector3(0, 0, 0));
@@ -152,16 +159,6 @@ export class GuiContainerComponent implements AfterViewInit {
     this.line.rotation.y += 0.01;
     // this.directorCamera.rotation.x -= 0.005;
 
-
-    if (this.frameCounter % 60 === 0) {
-      console.log('TAC');
-      // this.directorCamera.rotation.y -= 2 * Math.PI / 180;
-      // this.directorCamera.rotation.x -= 2 * Math.PI / 180;
-      // this.directorCamera.rotation.x += 100;
-      this.directorCameraRotateX = this.directorCamera.rotation.x;
-    }
-    this.frameCounter++;
-
     // if (this.activeCamera === this.camera) {
     //   this.camera.updateProjectionMatrix();
     //   this.cameraHelper.update();
@@ -170,50 +167,57 @@ export class GuiContainerComponent implements AfterViewInit {
     //   this.directorCamera.updateProjectionMatrix();
     // }
 
-    this.renderer.render(this.scene, this.camera);
+    this.renderer.render(this.scene, this.activeCamera);
   }
 
   @HostListener('document:keydown.ArrowLeft', ['$event'])
   goLeft(event: KeyboardEvent) {
     console.log('goLeft');
-    this.camera.position.x -= 0.05;
+    this.activeCamera.position.x -= 0.05;
   }
 
   @HostListener('document:keydown.ArrowRight', ['$event'])
   goRight(event: KeyboardEvent) {
     console.log('goRight');
-    this.camera.position.x += 0.05;
+    this.activeCamera.position.x += 0.05;
   }
 
   @HostListener('document:keydown.ArrowUp', ['$event'])
   goAhead(event: KeyboardEvent) {
-    this.camera.position.z -= 0.05;
+    this.activeCamera.position.z -= 0.05;
   }
 
   @HostListener('document:keydown.ArrowDown', ['$event'])
   goBack(event: KeyboardEvent) {
-    this.camera.position.z += 0.05;
+    this.activeCamera.position.z += 0.05;
   }
 
   @HostListener('document:keydown.q', ['$event'])
   goUp(event: KeyboardEvent) {
     // console.log('goUp');
-    this.camera.position.y += 0.05;
+    this.activeCamera.position.y += 0.05;
   }
 
   @HostListener('document:keydown.a', ['$event'])
   goDown(event: KeyboardEvent) {
     // console.log('goDown');
-    this.camera.position.y -= 0.05;
+    this.activeCamera.position.y -= 0.05;
   }
 
   setNormalView() {
     console.log('Normal');
     this.activeCamera = this.camera;
   }
+
+  setUpView() {
+    console.log('Up');
+    this.activeCamera = this.upCamera;
+  }
+
   setAngleView() {
     console.log('Angle');
-    this.activeCamera = this.directorCamera;
+    // this.activeCamera = this.directorCamera;
+    this.activeCamera = this.angleCamera
   }
 
 }
