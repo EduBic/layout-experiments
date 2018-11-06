@@ -53,8 +53,8 @@ export class GuiContainerComponent implements AfterViewInit {
 
     // Set Cameras
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    this.camera.position.z = 5;
-    this.camera.position.y = 1;
+    this.camera.position.z = 10;
+    this.camera.position.y = 3;
 
     this.activeCamera = this.camera;
 
@@ -62,8 +62,8 @@ export class GuiContainerComponent implements AfterViewInit {
     // this.scene.add(this.cameraHelper);
 
 
-    this.upCamera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 4);
-    this.upCamera.position.y += 4;
+    this.upCamera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10);
+    this.upCamera.position.y += 8;
     this.upCamera.rotation.x = 270 * Math.PI / 180;
 
     this.angleCamera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
@@ -71,12 +71,9 @@ export class GuiContainerComponent implements AfterViewInit {
     this.angleCamera.position.x = 10;
     this.angleCamera.position.z = 10;
     this.angleCamera.lookAt(new THREE.Vector3(0, 0, 0));
-    // this.angleCamera.rotation.x = 315 * Math.PI / 180;
-    // this.angleCamera.rotation.y = 45 * Math.PI / 180;
-    // this.angleCamera.rotation.z = 45 * Math.PI / 180;
 
-    const angleCameraHelper = new THREE.CameraHelper(this.angleCamera);
-    this.scene.add(angleCameraHelper);
+    // const angleCameraHelper = new THREE.CameraHelper(this.angleCamera);
+    // this.scene.add(angleCameraHelper);
 
 
     const upCameraHelper = new THREE.CameraHelper(this.upCamera);
@@ -172,36 +169,38 @@ export class GuiContainerComponent implements AfterViewInit {
 
   @HostListener('document:keydown.ArrowLeft', ['$event'])
   goLeft(event: KeyboardEvent) {
-    console.log('goLeft');
-    this.activeCamera.position.x -= 0.05;
+    // this.activeCamera.position.x -= 0.05;
+    this.activeCamera.translateX(-0.05);
   }
 
   @HostListener('document:keydown.ArrowRight', ['$event'])
   goRight(event: KeyboardEvent) {
-    console.log('goRight');
-    this.activeCamera.position.x += 0.05;
+    // this.activeCamera.position.x += 0.05;
+    this.activeCamera.translateX(0.05);
   }
 
   @HostListener('document:keydown.ArrowUp', ['$event'])
   goAhead(event: KeyboardEvent) {
-    this.activeCamera.position.z -= 0.05;
+    // this.activeCamera.position.z -= 0.05;
+    this.activeCamera.translateZ(-0.05);
   }
 
   @HostListener('document:keydown.ArrowDown', ['$event'])
   goBack(event: KeyboardEvent) {
-    this.activeCamera.position.z += 0.05;
+    // this.activeCamera.position.z += 0.05;
+    this.activeCamera.translateZ(0.05);
   }
 
   @HostListener('document:keydown.q', ['$event'])
   goUp(event: KeyboardEvent) {
-    // console.log('goUp');
-    this.activeCamera.position.y += 0.05;
+    // this.activeCamera.position.y += 0.05;
+    this.activeCamera.translateY(0.05);
   }
 
   @HostListener('document:keydown.a', ['$event'])
   goDown(event: KeyboardEvent) {
-    // console.log('goDown');
-    this.activeCamera.position.y -= 0.05;
+    // this.activeCamera.position.y -= 0.05;
+    this.activeCamera.translateY(-0.05);
   }
 
   setNormalView() {
