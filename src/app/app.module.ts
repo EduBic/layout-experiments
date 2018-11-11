@@ -11,6 +11,8 @@ import { LayoutContainerComponent } from './layout-container/layout-container.co
 import { GuiContainerComponent } from './gui-container/gui-container.component';
 import { BabylonContainerComponent } from './babylon-container/babylon-container.component';
 import { PixiContainerComponent } from './pixi-container/pixi-container.component';
+import { PixiPositionComponentComponent } from './pixi-position-component/pixi-position-component.component';
+import { PaperComponent } from './paper/paper.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/layout-test', pathMatch: 'full' },
@@ -18,6 +20,8 @@ const appRoutes: Routes = [
   { path: 'threejs-test', component: GuiContainerComponent },
   { path: 'babylonjs-test', component: BabylonContainerComponent },
   { path: 'pixi-test', component: PixiContainerComponent },
+  { path: 'pixi-position-test', component: PixiPositionComponentComponent },
+  { path: 'paper-test', component: PaperComponent },
   { path: '**', component:  LayoutContainerComponent },
 ];
 
@@ -30,6 +34,8 @@ const appRoutes: Routes = [
     GuiContainerComponent,
     BabylonContainerComponent,
     PixiContainerComponent,
+    PixiPositionComponentComponent,
+    PaperComponent,
   ],
   imports: [
     BrowserModule,

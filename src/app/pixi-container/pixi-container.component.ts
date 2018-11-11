@@ -233,6 +233,7 @@ export class PixiContainerComponent implements OnInit {
     testCube.hitArea = new PIXI.Rectangle(x, y, width, height);
     testCube.click = this.graphicClicked.bind(this);
 
+    console.log(testCube.position);
     this.stage.addChild(testCube);
   }
 
